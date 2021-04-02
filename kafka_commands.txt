@@ -1,0 +1,78 @@
+start zookeeper = bin/zookeeper-server-start.sh config/zookeeper.properties
+
+start kafka_server - kafka-server-start.sh config/server.properties
+
+create topic = kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic --create --partitions 3 --replication-factor 1
+
+topics descriptions = kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic first_topic -describe
+
+list topics = kafka-topics.sh --zookeeper 127.0.0.1:2181 --lis
+
+procedure = kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic first_topic
+
+consumer = kafka-console-consumer.sh --bootstarp-server 127.0.0.1:9002 --topic first_topic
+
+consuming from begining = kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --from-beginning
+
+cosnumer group = kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-first-app
+
+consumer groups list = kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --list
+
+describe consumer group = kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-first-app
+
+consumer reset offset to read from (--to-earliest, --by-period, --to-lates, --shift-by, --from-file, --ro-current) = kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-third-app --reset-offsets --to-earliest --execute --topic first_topic
+
+--reset-offsets                         Reset offsets of consumer group.       
+                                          Supports one consumer group at the   
+                                          time, and instances should be        
+                                          inactive                             
+                                        Has 2 execution options: --dry-run     
+                                          (the default) to plan which offsets  
+                                          to reset, and --execute to update    
+                                          the offsets. Additionally, the --    
+                                          export option is used to export the  
+                                          results to a CSV format.             
+                                        You must choose one of the following   
+                                          reset specifications: --to-datetime, 
+                                          --by-period, --to-earliest, --to-    
+                                          latest, --shift-by, --from-file, --  
+                                          to-current.                          
+                                        To define the scope use --all-topics   
+                                          or --topic. One scope must be        
+                                          specified unless you use '--from-    
+                                          file'.                               
+--shift-by <Long: number-of-offsets>    Reset offsets shifting current offset  
+                                          by 'n', where 'n' can be positive or 
+                                          negative.                            
+--state [String]                        When specified with '--describe',      
+                                          includes the state of the group.     
+                                        Example: --bootstrap-server localhost: 
+                                          9092 --describe --group group1 --    
+                                          state                                
+                                        When specified with '--list', it       
+                                          displays the state of all groups. It 
+                                          can also be used to list groups with 
+                                          specific states.                     
+                                        Example: --bootstrap-server localhost: 
+                                          9092 --list --state stable,empty     
+                                        This option may be used with '--       
+                                          describe', '--list' and '--bootstrap-
+                                          server' options only.                
+--timeout <Long: timeout (ms)>          The timeout that can be set for some   
+                                          use cases. For example, it can be    
+                                          used when describing the group to    
+                                          specify the maximum amount of time   
+                                          in milliseconds to wait before the   
+                                          group stabilizes (when the group is  
+                                          just created, or is going through    
+                                          some changes). (default: 5000)       
+--to-current                            Reset offsets to current offset.       
+--to-datetime <String: datetime>        Reset offsets to offset from datetime. 
+                                          Format: 'YYYY-MM-DDTHH:mm:SS.sss'    
+--to-earliest                           Reset offsets to earliest offset.      
+--to-latest                             Reset offsets to latest offset.        
+--to-offset <Long: offset>              Reset offsets to a specific offset.
+
+(shift by forward)kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-third-app --reset-offsets --shift-by 2 --execute --topic first_topic
+(shift by backward)kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-third-app --reset-offsets --shift-by -2 --execute --topic first_topic
+
