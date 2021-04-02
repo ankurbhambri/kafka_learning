@@ -1,6 +1,8 @@
-from kafka import KafkaConsumer
-from pymongo import MongoClient
 from json import loads
+
+from pymongo import MongoClient
+
+from kafka import KafkaConsumer
 
 consumer = KafkaConsumer(
     'numtest',
