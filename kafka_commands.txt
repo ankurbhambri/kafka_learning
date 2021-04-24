@@ -76,3 +76,4 @@ consumer reset offset to read from (--to-earliest, --by-period, --to-lates, --sh
 (shift by forward)kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-third-app --reset-offsets --shift-by 2 --execute --topic first_topic
 (shift by backward)kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --topic first_topic --group my-third-app --reset-offsets --shift-by -2 --execute --topic first_topic
 
+CLASSPATH=/usr/share/java/kafka-connect-jdbc/mysql-connector-java-8.0.24.jar bin/connect-distributed.sh config/connect-distributed.properties

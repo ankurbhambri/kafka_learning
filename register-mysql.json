@@ -1,0 +1,32 @@
+{
+    "name": "inventory-connector",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max": "1",
+        "database.hostname": "uat-db-1.cxduielyhevd.ap-south-1.rds.amazonaws.com",
+        "database.port": "3906",
+        "database.user": "rb_uat_user",
+        "database.password": "4TOqee$p0xS3HuV",
+        "database.server.id": "184054",
+        "database.server.name": "dbserver1",
+        "database.whitelist": "renewbuy_data",
+        "database.history.kafka.bootstrap.servers": "localhost:9092",
+        "database.history.kafka.topic": "schema-changes.renewbuy_data"
+    }
+}
+
+curl -X POST -H "Content-Type: application/json"  --data '{
+    "name": "mysql-bilu",
+    "config": {
+        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+        "database.hostname": "localhost",
+        "database.port": "3306",
+        "database.user": "root",
+        "database.password": "root",
+        "database.server.id": "42",
+        "database.server.name": "kafka_connect",
+        "database.history.kafka.bootstrap.servers": "localhost:9092",
+        "database.history.kafka.topic": "dbhistory.kafka_connect",
+        "include.schema.changes": "true"
+    }
+}' http: //localhost:8083/connectors

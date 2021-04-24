@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from kafka import KafkaConsumer
 
 consumer = KafkaConsumer(
-    'numtest',
+    'first_topic',
     bootstrap_servers=['localhost:9092'],
     auto_offset_reset='earliest',
     enable_auto_commit=True,

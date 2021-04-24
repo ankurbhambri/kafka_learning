@@ -1,0 +1,1 @@
+connect-standalone.sh connect-standalone.properties mysql.properties
