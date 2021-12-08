@@ -15,7 +15,7 @@
     }
 }
 
-curl -X POST -H "Content-Type: application/json"  --data '{
+curl -X POST -H "Content-Type: application/json"  --data ' {
     "name": "mysql-bilu",
     "config": {
         "connector.class": "io.debezium.connector.mysql.MySqlConnector",
