@@ -1,0 +1,4 @@
+curl -X POST -H "Content-Type: application/json" --data '{
+    "name": "file-sink-demo-distributed", 
+    "config": {"connector.class":"FileStreamSinkConnector", "tasks.max":"3", "file":"sink-2-file.txt", "topics":"demo-2-distributed" }
+}' http://localhost:8083/connectors

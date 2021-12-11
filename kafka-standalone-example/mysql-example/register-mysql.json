@@ -16,7 +16,7 @@
 }
 
 curl -X POST -H "Content-Type: application/json"  --data ' {
-    "name": "mysql-bilu",
+    "name": "mysql-test",
     "config": {
         "connector.class": "io.debezium.connector.mysql.MySqlConnector",
         "database.hostname": "localhost",
