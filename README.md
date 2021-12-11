@@ -1,4 +1,4 @@
-# Kafka Confluent Connect Standalone with Mysql DB
+# Kafka Connect Standalone with Mysql DB and File
 
 1. Download mysql jdbc jar. <br />
 2. Run Zookeeper and Kafka Cluster Server. <br />
@@ -21,6 +21,7 @@
     poll.interval.ms=100 <br />
 
 6. kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test_tbl ( extra to include --from-beginning)
+
 # Python with kafka dependencies
 
 confluent-kafka==1.4.2 <br />
