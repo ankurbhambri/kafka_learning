@@ -9,3 +9,24 @@ curl -X POST -H "Content-Type: application/json" --data '{
     "name": "file-stream-sink-demo-standalone", 
     "config": {"connector.class":"FileStreamSinkConnector", "tasks.max":"3", "file":"sink-1-file.txt", "topics":"demo-1-standalone" }
 }' http://localhost:8083/connectors
+
+curl -X POST -H "Content-Type: application/json" --data '{
+    "name": "postgres-sink-distributed-1",
+    "config":{
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": 1,
+        "topics": "topic_source",
+        "connection.url":"jdbc:mysql://localhost:3306/test?user=root&password=",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "true",
+        "auto.create": true,
+        "auto.evolve": true,
+        "pk.mode": "none"
+    }
+}' http://localhost:8083/connectors
+
+// "pk.fields": "__connect_topic,__connect_partition,__connect_offset",
+// "insert.mode": "insert",
+// "fields.whitelist": "id,name",
+// "dialect.name": "MySqlDatabaseDialect",
+// "connection.url": "jdbc:postgresql:castor.db.elephantsql.com:5432/ockvidjf?user=ockvidjf&password=zKtgVT1fQb5xCH5wIc6ieNKYuOPK1TrW",
