@@ -15,7 +15,8 @@
     - (log.dirs=/home/ubuntu/kafka_2.13-2.8.0/data/zookeeper) <br /> 
     - Reason of these changes is kafka by default creates logs of kafka and zookeeper configuration in tmp directory which is created in volatile memory and there is chance of data lost thats why my suggestion is to change path <br />
 
-# Basic commands present in kafka_basic_commands.txt
+# Kafka Basic commands
+   - Present in kafka_basic_commands.txt <br />
 
 # Useful Jars for Examples are in connector_jars
    - Provide plugins path in Worker.properties for JDBC connect <br /> 
