@@ -1,16 +1,4 @@
 curl -X POST -H "Content-Type: application/json" --data '{
-    "name": "file-sink-demo-distributed", 
-    "config": {"connector.class":"FileStreamSinkConnector", "tasks.max":"3", "file":"sink-2-file.txt", "topics":"demo-2-distributed" }
-}' http://localhost:8083/connectors
-
-
-
-curl -X POST -H "Content-Type: application/json" --data '{
-    "name": "file-stream-sink-demo-standalone", 
-    "config": {"connector.class":"FileStreamSinkConnector", "tasks.max":"3", "file":"sink-1-file.txt", "topics":"demo-1-standalone" }
-}' http://localhost:8083/connectors
-
-curl -X POST -H "Content-Type: application/json" --data '{
     "name": "postgres-sink-distributed-1",
     "config":{
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",

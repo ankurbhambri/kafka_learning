@@ -1,4 +1,4 @@
-# Kafka Connect Standalone with Mysql DB and File
+# Kafka Connect Distributed and Standalone with Mysql DB and File
 
 1. Download mysql jdbc jar. <br />
 2. Run Zookeeper and Kafka Cluster Server. <br />
