@@ -1,1 +1,1 @@
-connect-standalone.sh connect-standalone.properties mysql.properties
+connect-standalone.sh worker.properties A_Source.properties A_Sink.properties
