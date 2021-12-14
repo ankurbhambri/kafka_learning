@@ -1,4 +1,4 @@
-{
+curl -X POST -H "Content-Type: application/json" --data '{
     "name": "inventory-connector",
     "config": {
         "connector.class": "io.debezium.connector.mysql.MySqlConnector",
@@ -13,20 +13,36 @@
         "database.history.kafka.bootstrap.servers": "localhost:9092",
         "database.history.kafka.topic": "schema-changes.renewbuy_data"
     }
-}
+}'
 
-curl -X POST -H "Content-Type: application/json"  --data ' {
-    "name": "mysql-test",
-    "config": {
-        "connector.class": "io.debezium.connector.mysql.MySqlConnector",
-        "database.hostname": "localhost",
-        "database.port": "3306",
-        "database.user": "root",
-        "database.password": "root",
-        "database.server.id": "42",
-        "database.server.name": "kafka_connect",
-        "database.history.kafka.bootstrap.servers": "localhost:9092",
-        "database.history.kafka.topic": "dbhistory.kafka_connect",
-        "include.schema.changes": "true"
+curl -X POST -H "Content-Type: application/json" --data '{
+    "name":"mysql-stream-distributed-1",
+        "config": {
+        "connector.class":"io.confluent.connect.jdbc.JdbcSourceConnector",
+        "tasks.max":1,
+        "connection.url":"jdbc:mysql://localhost:3306/test?user=root&password=",
+        "mode":"incrementing",
+        "incrementing.column.name":"id",
+        "table.whitelist":"source",
+        "topic.prefix":"topic_",
+        "validate.non.null":false,
+        "poll.interval.ms":100
     }
-}' http: //localhost:8083/connectors
+
+}' http://localhost:8083/connectors
+
+
+curl -X POST -H "Content-Type: application/json" --data '{
+    "name": "mysql-sink-standalone-1",
+    "config":{
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": 1,
+        "topics": "topic_tbl",
+        "connection.url":"jdbc:mysql://localhost:3306/test?user=root&password=",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter.schemas.enable": "true",
+        "auto.create": true,
+        "auto.evolve": true,
+        "pk.mode": "none"
+    }
+}' http://localhost:8083/connectors
