@@ -20,4 +20,16 @@ Consumer groups list = kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:909
 
 Describe consumer group = kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-first-app
 
+# Avro commands
+
+Producer = kafka-avro-console-producer --broker-list localhost:9092 --topic test-avro --property schema.registry.url=http://127.0.0.1:8081 --property value.schema='{"type":"record", "name":"myrecord", "fields":[{"name":"f1", "type":"string"}]}'
+
+# Incopatible 409 error can't evolve
+Producer = kafka-avro-console-producer --broker-list localhost:9092 --topic test-avro --property schema.registry.url=http://127.0.0.1:8081 --property value.schema='{"type":"int"}'
+
+# Evolve Producer
+Producer = kafka-avro-console-producer --broker-list localhost:9092 --topic test-avro --property schema.registry.url=http://127.0.0.1:8081 --property value.schema='{"type":"record", "name":"myrecord", "fields":[{"name":"f1", "type":"string"}, {"name": "f2", "type": "int", "default": 0}]}'
+
+Consumer = kafka-avro-console-consumer --topic test-avro --bootstrap-server localhost:9092 --property schema.registry.url=http://127.0.0.1:8081 --from-beginning
+
 CLASSPATH=/usr/share/java/kafka-connect-jdbc/mysql-connector-java-8.0.24.jar bin/connect-distributed.sh config/connect-distributed.properties
