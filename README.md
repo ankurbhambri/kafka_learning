@@ -1,6 +1,6 @@
 # Kafka Setup
 
-* Download https://kafka.apache.org/downloads latest scala version <br />
+* Download https://kafka.apache.org/downloads latest scala version. <br />
 
 * Extract tar -xvf kafka package <br />
 
